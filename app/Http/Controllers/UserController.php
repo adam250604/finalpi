@@ -11,8 +11,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
-        $this->middleware('admin');
+    // Middleware is now handled by route groups in routes/web.php
     }
 
     public function index()

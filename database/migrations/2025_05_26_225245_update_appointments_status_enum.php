@@ -18,7 +18,9 @@ return new class extends Migration
             ->update(['status' => 'pending']);
 
         // Then modify the enum
-        DB::statement("ALTER TABLE appointments MODIFY COLUMN status ENUM('pending', 'confirmed', 'in_progress', 'completed', 'cancelled', 'no_show') NOT NULL DEFAULT 'pending'");
+        Schema::table('appointments', function (Blueprint $table) {
+            $table->string('status')->default('pending')->change();
+        });
     }
 
     /**
@@ -32,6 +34,8 @@ return new class extends Migration
             ->update(['status' => 'scheduled']);
 
         // Revert the enum
-        DB::statement("ALTER TABLE appointments MODIFY COLUMN status ENUM('scheduled', 'completed', 'cancelled', 'no_show') NOT NULL DEFAULT 'scheduled'");
+        Schema::table('appointments', function (Blueprint $table) {
+            $table->string('status')->default('scheduled')->change();
+        });
     }
 };

@@ -29,7 +29,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Admin Routes
-    Route::middleware('role:admin')->group(function () {
+    Route::middleware(\App\Http\Middleware\CheckRole::class . ':admin')->group(function () {
         Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
         Route::resource('doctors', DoctorController::class);
         Route::resource('patients', PatientController::class);
@@ -39,13 +39,13 @@ Route::middleware(['auth'])->group(function () {
     });
 
     // Doctor Routes
-    Route::middleware('role:doctor')->group(function () {
+    Route::middleware(\App\Http\Middleware\CheckRole::class . ':doctor')->group(function () {
         Route::get('/my-patients', [DoctorController::class, 'patients'])->name('doctor.patients');
         Route::get('/my-appointments', [AppointmentController::class, 'doctorAppointments'])->name('doctor.appointments');
     });
 
     // Patient Routes
-    Route::middleware('role:patient')->group(function () {
+    Route::middleware(\App\Http\Middleware\CheckRole::class . ':patient')->group(function () {
         Route::get('/appointments/create', [AppointmentController::class, 'create'])->name('appointments.create');
         Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments.store');
         Route::patch('/appointments/{appointment}/cancel', [AppointmentController::class, 'cancel'])->name('appointments.cancel');
