@@ -66,7 +66,7 @@ class AppointmentController extends Controller
             abort(403, 'Only patients can create appointments.');
         }
 
-        $doctors = Doctor::with(['user', 'schedule'])
+    $doctors = Doctor::with('user') // 'schedule' removed from here
             ->where('is_available', true)
             ->get();
 
