@@ -44,39 +44,6 @@
         <x-input-error :messages="$errors->get('address')" class="mt-2" />
     </div>
 
-    <!-- Date of Birth -->
-    <div>
-        <x-input-label for="date_of_birth" :value="__('Date of Birth')" />
-        <x-text-input id="date_of_birth" class="block mt-1 w-full" type="date" name="date_of_birth" :value="old('date_of_birth')" required />
-        <x-input-error :messages="$errors->get('date_of_birth')" class="mt-2" />
-    </div>
-
-    <!-- Gender -->
-    <div>
-        <x-input-label for="gender" :value="__('Gender')" />
-        <select id="gender" name="gender" class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
-            <option value="">Select gender</option>
-            <option value="male" {{ old('gender') == 'male' ? 'selected' : '' }}>Male</option>
-            <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>Female</option>
-            <option value="other" {{ old('gender') == 'other' ? 'selected' : '' }}>Other</option>
-        </select>
-        <x-input-error :messages="$errors->get('gender')" class="mt-2" />
-    </div>
-
-    <!-- Emergency Contact Name -->
-    <div>
-        <x-input-label for="emergency_contact_name" :value="__('Emergency Contact Name')" />
-        <x-text-input id="emergency_contact_name" class="block mt-1 w-full" type="text" name="emergency_contact_name" :value="old('emergency_contact_name')" required />
-        <x-input-error :messages="$errors->get('emergency_contact_name')" class="mt-2" />
-    </div>
-
-    <!-- Emergency Contact Phone -->
-    <div>
-        <x-input-label for="emergency_contact_phone" :value="__('Emergency Contact Phone')" />
-        <x-text-input id="emergency_contact_phone" class="block mt-1 w-full" type="tel" name="emergency_contact_phone" :value="old('emergency_contact_phone')" required />
-        <x-input-error :messages="$errors->get('emergency_contact_phone')" class="mt-2" />
-    </div>
-
     <!-- Password -->
     <div>
         <x-input-label for="password" :value="__('Password')" />
@@ -104,6 +71,39 @@
 
     <!-- Patient Fields -->
     <div id="patientFields" class="space-y-4" style="display: none;">
+        <!-- Date of Birth (MOVED HERE) -->
+        <div>
+            <x-input-label for="date_of_birth" :value="__('Date of Birth')" />
+            <x-text-input id="date_of_birth" class="block mt-1 w-full" type="date" name="date_of_birth" :value="old('date_of_birth')" />
+            <x-input-error :messages="$errors->get('date_of_birth')" class="mt-2" />
+        </div>
+
+        <!-- Gender (MOVED HERE) -->
+        <div>
+            <x-input-label for="gender" :value="__('Gender')" />
+            <select id="gender" name="gender" class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                <option value="">Select gender</option>
+                <option value="male" {{ old('gender') == 'male' ? 'selected' : '' }}>Male</option>
+                <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>Female</option>
+                <option value="other" {{ old('gender') == 'other' ? 'selected' : '' }}>Other</option>
+            </select>
+            <x-input-error :messages="$errors->get('gender')" class="mt-2" />
+        </div>
+
+        <!-- Emergency Contact Name (MOVED HERE) -->
+        <div>
+            <x-input-label for="emergency_contact_name" :value="__('Emergency Contact Name')" />
+            <x-text-input id="emergency_contact_name" class="block mt-1 w-full" type="text" name="emergency_contact_name" :value="old('emergency_contact_name')" />
+            <x-input-error :messages="$errors->get('emergency_contact_name')" class="mt-2" />
+        </div>
+
+        <!-- Emergency Contact Phone (MOVED HERE) -->
+        <div>
+            <x-input-label for="emergency_contact_phone" :value="__('Emergency Contact Phone')" />
+            <x-text-input id="emergency_contact_phone" class="block mt-1 w-full" type="tel" name="emergency_contact_phone" :value="old('emergency_contact_phone')" />
+            <x-input-error :messages="$errors->get('emergency_contact_phone')" class="mt-2" />
+        </div>
+
         <!-- Blood Type -->
         <div>
             <x-input-label for="blood_type" :value="__('Blood Type')" />

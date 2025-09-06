@@ -41,15 +41,18 @@ class RegisteredUserController extends Controller
             'phone' => ['required', 'string', 'max:20'],
             'address' => ['required', 'string'],
             'role' => ['required', 'string', 'in:doctor,patient'],
-            'date_of_birth' => ['required', 'date', 'before:today'],
-            'gender' => ['required', 'string', 'in:male,female,other'],
-            'emergency_contact_name' => ['required', 'string', 'max:255'],
-            'emergency_contact_phone' => ['required', 'string', 'max:20'],
+
+            // Patient-specific fields
+            'date_of_birth' => ['required_if:role,patient', 'nullable', 'date', 'before:today'],
+            'gender' => ['required_if:role,patient', 'nullable', 'string', 'in:male,female,other'],
+            'emergency_contact_name' => ['required_if:role,patient', 'nullable', 'string', 'max:255'],
+            'emergency_contact_phone' => ['required_if:role,patient', 'nullable', 'string', 'max:20'],
+            
             // Doctor specific fields
-            'specialization' => ['required_if:role,doctor', 'string', 'max:100'],
-            'qualifications' => ['required_if:role,doctor', 'string', 'max:500'],
-            'license_number' => ['required_if:role,doctor', 'string', 'max:50', 'unique:doctors'],
-            'experience' => ['required_if:role,doctor', 'integer', 'min:0'],
+            'specialization' => ['required_if:role,doctor', 'nullable', 'string', 'max:100'],
+            'qualifications' => ['required_if:role,doctor', 'nullable', 'string', 'max:500'],
+            'license_number' => ['required_if:role,doctor', 'nullable', 'string', 'max:50', 'unique:doctors'],
+            'experience' => ['required_if:role,doctor', 'nullable', 'integer', 'min:0'],
         ]);
 
         DB::transaction(function () use ($request) {
